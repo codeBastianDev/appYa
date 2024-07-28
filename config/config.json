@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "28467pr10np",
+    "database": "pedidosya",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "28467pr10np",
+    "database": "pedidosya",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "28467pr10np",
+    "database": "pedidosya",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
