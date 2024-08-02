@@ -3,3 +3,12 @@
     height: 300px;
     object-fit: cover;
 }
+
+.navbar-custom {
+    width: 16rem; 
+    padding: 1.5rem;
+}
+.main-content {
+    margin-left: 16rem; 
+    padding: 1.5rem;
+}

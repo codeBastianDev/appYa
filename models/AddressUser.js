@@ -1,36 +1,34 @@
 const { DataTypes } = require("sequelize");
 const db = require("../contexts/cnx");
-const Products = require("./Product");
-const Orders = require("./Order");
+const Users = require("./User");
+const Addresses = require("./Address");
 
-const OrderDetails = db.define("orderDetail", { 
+const AddressesUser = db.define("addressUser", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    orderId: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Orders,
+            model: Users,
             key: "id",
         }
     },
-    productId: {
+    addressId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
-            model: Products,
+            model: Addresses,
             key: "id",
-        }
+        },
     },
 });
 
-OrderDetails.belongsTo(Orders, { foreignKey: "orderId" });
-OrderDetails.belongsTo(Products, { foreignKey: "productId" });
+AddressesUser.belongsTo(Users, { foreignKey: "userId"});
+AddressesUser.belongsTo(Addresses, { foreignKey: "addressId"});
 
-
-
-module.exports = OrderDetails;
+module.exports = AddressesUser;

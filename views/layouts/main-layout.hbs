@@ -4,76 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{pageTitle}}</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .navbar {
-            width: 16rem; /* Ancho fijo para el navbar siempre expandido */
-            padding: 1.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/lib/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    {{#if loginActive}}
+        <link rel="stylesheet" href="/assets/css/login.css">
+    {{/if}}
 </head>
-<body class="bg-gray-100">
+
+<body class="bg-light">
+    
     <header>
-        <nav class="bg-red-600 text-white h-screen fixed navbar">
-            <div class="flex flex-col items-center py-6">
-                <a class="text-2xl font-bold flex items-center" href="/">
-                    <img src="/assets/imgs/logo.png" alt="Logo" class="h-16 w-16 rounded-full mb-2">
-                    <span class="ml-2">PedidosYa</span>
-                </a>
-                <div class="mt-8 w-full">
-                    <a href="../../dist/index.html" class="flex flex-col items-center px-4 py-2 text-lg rounded-lg transition-colors duration-300 hover:bg-red-500 hover:text-white">
-                        <i class="fas fa-users text-2xl mb-2"></i>
-                        Usuarios
-                    </a>
-                    <a href="#" class="flex flex-col items-center px-4 py-4 text-lg rounded-lg transition-colors duration-300 hover:bg-red-500 hover:text-white">
-                        <i class="fas fa-clipboard-list text-2xl mb-2"></i>
-                        Pedidos
-                    </a>
-                    <a href="#" class="flex flex-col items-center px-4 py-4 text-lg rounded-lg transition-colors duration-300 hover:bg-red-500 hover:text-white">
-                        <i class="fas fa-box text-2xl mb-2"></i>
-                        Productos
-                    </a>
+        <nav class="bg-danger text-white h-100 fixed-top navbar-custom d-flex flex-column justify-content-between">
+            <div class="d-flex flex-column align-items-center py-3">
+                <div class="text-center text-white mb-4">
+                    <img src="/assets/imgs/logo.png" alt="Logo" class="rounded-circle mb-2" style="height: 64px; width: 64px;">
+                    <h4 class="mb-0">PedidosYa</h4>
+                </div>
+                
+                <div class="nav flex-column w-100">
+                    {{#if isAuthenticated}}
+                        <a href="/" class="nav-link text-white text-center py-2">
+                            <i class="fas fa-home mb-2"></i>
+                            <p>Home</p>
+                        </a>
+                    {{/if}}
+                    {{#if isAuthenticated}}
+                        <a href="../mantRoles" class="nav-link text-white text-center py-2">
+                            <i class="fas fa-users mb-2"></i>
+                            <p>Usuarios</p>
+                        </a>
+                    {{/if}}
+                    {{#if isAuthenticated}}
+                        <a href="#" class="nav-link text-white text-center py-2">
+                            <i class="fas fa-clipboard-list mb-2"></i>
+                            <p>Pedidos</p>
+                        </a>
+                    {{/if}}
+                    {{#if isAuthenticated}}
+                        <a href="#" class="nav-link text-white text-center py-2">
+                            <i class="fas fa-box mb-2"></i>
+                            <p>Productos</p>
+                        </a>
+                    {{/if}}
                 </div>
             </div>
+
+            {{#if isAuthenticated}}
+                <form action="../logout" method="POST">
+                    <button type="submit" class="btn nav-link text-white text-center py-2 w-100">
+                        <i class="fas fa-sign-out-alt mb-2"></i>
+                        <p>LogOut</p>
+                    </button>
+                </form>
+            {{else}}
+                <div class="nav flex-column w-100">
+                    <a href="../login" class="nav-link text-white text-center py-2">
+                        <i class="fas fa-sign-in-alt mb-2"></i>
+                        <p>Login</p>
+                    </a>
+                </div>
+            {{/if}}
         </nav>
     </header>
 
-    <main class="ml-64 p-6">
-        <h1 class="text-3xl font-bold mb-6">Nuestros Productos</h1>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Producto 1 -->
-            <div class="bg-white p-4 rounded-lg shadow-lg">
-                <img src="https://b.zmtcdn.com/data/pictures/chains/4/16592484/1514a01f7ce9d7c5bf2f937de9714149.jpg" alt="Hamburguesa" class="w-full h-48 object-cover rounded-lg mb-4">
-                <h2 class="text-xl font-semibold mb-2">Hamburguesa Clásica</h2>
-                <p class="text-lg text-red-600 mb-4">$9.99</p>
-                <a href="#" class="block w-full text-center bg-red-600 text-white py-2 rounded-lg transition-colors duration-300 hover:bg-red-500">Detalles</a>
-            </div>
-            <!-- Producto 2 -->
-            <div class="bg-white p-4 rounded-lg shadow-lg">
-                <img src="https://recetinas.com/wp-content/uploads/2017/09/pizza-margarita.jpg" alt="Pizza" class="w-full h-48 object-cover rounded-lg mb-4">
-                <h2 class="text-xl font-semibold mb-2">Pizza Margarita</h2>
-                <p class="text-lg text-red-600 mb-4">$12.99</p>
-                <a href="#" class="block w-full text-center bg-red-600 text-white py-2 rounded-lg transition-colors duration-300 hover:bg-red-500">Detalles</a>
-            </div>
-            <!-- Producto 3 -->
-            <div class="bg-white p-4 rounded-lg shadow-lg">
-                <img src="https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vczIzMjA5LnBjZG4uY28vd3AtY29udGVudC91cGxvYWRzLzIwMTkvMDQvTWV4aWNhbi1TdHJlZXQtVGFjb3NJTUdfOTA5MS5qcGciLCJleHBpcmVzX2F0IjoxNjAxMzQ3Njk4fQ.P2uhqiWUJ3BGqmOV3s6JKCZHQLAE2pP3MKZ9gb-qVQY/img.jpg?width=2000&height=2000" alt="Tacos" class="w-full h-48 object-cover rounded-lg mb-4">
-                <h2 class="text-xl font-semibold mb-2">Tacos al Pastor</h2>
-                <p class="text-lg text-red-600 mb-4">$8.99</p>
-                <a href="#" class="block w-full text-center bg-red-600 text-white py-2 rounded-lg transition-colors duration-300 hover:bg-red-500">Detalles</a>
-            </div>
-        </div>
-
-        <div id="map" style="height: 400px; width: 100%;"></div>
+    <main class="main-content">
+        {{{body}}}
     </main>
     
-    <footer class="bg-white shadow-md py-4 mt-6">
-        <div class="container mx-auto px-4 text-center text-gray-500">
-            © 2024 PedidosYa. Todos los derechos reservados.
-        </div>
-    </footer>
+    {{#if loginActive}}
+    {{else}}
+        <footer class="bg-white shadow-sm py-4 mt-6">
+            <div class="container text-center text-muted">
+                © 2024 PedidosYa. Todos los derechos reservados XD.
+            </div>
+        </footer>
+    {{/if}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 </body>
 </html>

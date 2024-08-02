@@ -1,7 +1,7 @@
 const {DataTypes} = require("sequelize");
-const connection = require("../contexts/AppContext");
+const db = require("../contexts/cnx");
 
-const Roles = connection.define("role", {
+const Roles = db.define("role", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -13,5 +13,6 @@ const Roles = connection.define("role", {
         allowNull: false,
     },
 });
+
 
 module.exports = Roles;

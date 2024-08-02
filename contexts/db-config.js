@@ -3,5 +3,6 @@ module.exports = {
     USER: 'root',
     PASSWORD: '28467pr10np',
     DATABASE: 'pedidosya',
-    DIALECT: 'mysql'
+    DIALECT: 'mysql',
+    PORT: 3306
 }

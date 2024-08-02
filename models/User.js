@@ -1,9 +1,8 @@
 const { DataTypes } = require("sequelize");
-const connection = require("../contexts/AppContext");
+const db = require("../contexts/cnx");
 const Roles = require("./Role");
-const Addresses = require("./Address");
 
-const Users = connection.define("user", {
+const Users = db.define("user", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -48,14 +47,6 @@ const Users = connection.define("user", {
             key: "id",
         },
     },
-    addressId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: Addresses,
-            key: "id",
-        },
-    },
     isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
@@ -72,6 +63,5 @@ const Users = connection.define("user", {
 
 // Definir asociaciones
 Users.belongsTo(Roles, { foreignKey: "roleId"});
-Users.belongsTo(Addresses, { foreignKey: "addressId"}); 
 
 module.exports = Users;

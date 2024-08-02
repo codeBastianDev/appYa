@@ -1,9 +1,9 @@
 const {DataTypes} = require("sequelize");
-const connection = require("../contexts/AppContext");
+const db = require("../contexts/cnx");
 const Users = require("./User");
 const Commerces = require("./Commerce");
 
-const Categories = connection.define("category", {
+const Categories = db.define("category", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -29,5 +29,6 @@ const Categories = connection.define("category", {
 });
 
 Categories.belongsTo(Commerces, { foreignKey: "commerceId" });
+
 
 module.exports = Categories;

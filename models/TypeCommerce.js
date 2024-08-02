@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
-const connection = require("../contexts/AppContext");
+const db = require("../contexts/cnx");
 
-const TypeCommerces = connection.define("typeCommerce", {
+const TypeCommerces = db.define("typeCommerce", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -17,5 +17,7 @@ const TypeCommerces = connection.define("typeCommerce", {
         allowNull: true,
     }
 });
+
+
 
 module.exports = TypeCommerces;

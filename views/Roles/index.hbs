@@ -1,0 +1,23 @@
+<div class="row mb-3">
+
+    <h1>Here Roles</h1> 
+
+    <div>
+        <a href="#" class="btn btn-success mt-3 float-end mb-3">Make a new Role</a>
+    </div>
+
+    <div class="row mt-5">
+    
+    {{#each rols}}
+        <div class="col-12 col-sm-3 mt-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+
+</div>
+</div>

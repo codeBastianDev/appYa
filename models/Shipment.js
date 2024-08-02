@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
-const connection = require("../contexts/AppContext");
+const db = require("../contexts/cnx");
 const Orders = require("./Order");
 const Users = require("./User");
 
-const Shipments = connection.define("shipping", {
+const Shipments = db.define("shipment", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -32,7 +32,9 @@ const Shipments = connection.define("shipping", {
     },
 });
 
-Pokemons.belongsTo(Orders, { foreignKey: 'orderId' });
-Pokemons.belongsTo(Users, { foreignKey: 'userId' });
+Shipments.belongsTo(Orders, { foreignKey: 'orderId' });
+Shipments.belongsTo(Users, { foreignKey: 'userId' });
+
+
 
 module.exports = Shipments;

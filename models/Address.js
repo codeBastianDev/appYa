@@ -1,21 +1,12 @@
 const {DataTypes} = require("sequelize");
-const connection = require("../contexts/AppContext");
-const Users = require("./User");
+const db = require("../contexts/cnx");
 
-const Addresses = connection.define("address", {
+const Addresses = db.define("address", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
-    },
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Users,
-            key: "id",
-        }
     },
     street: {
         type: DataTypes.STRING,
@@ -24,9 +15,7 @@ const Addresses = connection.define("address", {
     description: {
         type: DataTypes.STRING,
         allowNull: true,
-    }
-})
-
-Addresses.belongsTo(Users, { foreignKey: "userId"});
+    },
+});
 
 module.exports = Addresses;

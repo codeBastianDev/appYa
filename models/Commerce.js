@@ -1,8 +1,8 @@
 const {DataTypes} = require("sequelize");
-const connection = require("../contexts/AppContext");
+const db = require("../contexts/cnx");
 const TypeCommerces = require("./TypeCommerce");
 
-const Commerces = connection.define("commerce", {
+const Commerces = db.define("commerce", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

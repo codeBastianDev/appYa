@@ -1,9 +1,9 @@
 const {DataTypes} = require("sequelize");
-const connection = require("../contexts/AppContext");
+const db = require("../contexts/cnx");
 const Users = require("./User");
 const Commerces = require("./Commerce");
 
-const Favorites = connection.define("favorite", {
+const Favorites = db.define("favorite", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -31,5 +31,7 @@ const Favorites = connection.define("favorite", {
 
 Favorites.belongsTo(Users, { foreignKey: "userId"});
 Favorites.belongsTo(Commerces, { foreignKey: "commerceId"});
+
+
 
 module.exports = Favorites;
