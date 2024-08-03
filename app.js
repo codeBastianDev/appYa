@@ -3,6 +3,8 @@ const path = require("path");
 const app = express();
 const { engine } = require("express-handlebars");
 const db = require("./contexts/cnx");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 //Imports Models
 const Itbis = require("./models/Itbis");
@@ -24,18 +26,18 @@ const ErrorController = require("./controllers/errorController");
 //const roleController = require("./controllers/authController");
 //const authController = require("./controllers/roleController");
 
-//Middleware
+//Middlewares
+
+app.use(session({secret:"anything", resave:true, saveUninitialized:true}));
+
+app.use(flash());
+
 app.use((req, res, next) => 
   {
-    const cookie = req.get("Cookie");
-    let loggedIn = false;
-
-
-    if(cookie){
-      loggedIn = cookie.split("=")[1];
-    }
-
-    res.locals.isAuthenticated = loggedIn;
+    const errors = req.flash("errors");
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.errorMessage = errors;
+    res.locals.HasErrorMessage = errors.length > 0;
     next();
   }
 );

@@ -13,7 +13,6 @@
 </head>
 
 <body class="bg-light">
-    
     <header>
         <nav class="bg-danger text-white h-100 fixed-top navbar-custom d-flex flex-column justify-content-between">
             <div class="d-flex flex-column align-items-center py-3">
@@ -59,9 +58,13 @@
                 </form>
             {{else}}
                 <div class="nav flex-column w-100">
-                    <a href="../login" class="nav-link text-white text-center py-2">
+                    <a href="../login" class="nav-link text-white text-center py-2 {{#if loginActive}}active{{/if}}">
                         <i class="fas fa-sign-in-alt mb-2"></i>
                         <p>Login</p>
+                    </a>
+                    <a href="../signup" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                        <i class="fas fa-sign-in-alt mb-2"></i>
+                        <p>Signup</p>
                     </a>
                 </div>
             {{/if}}
@@ -69,6 +72,18 @@
     </header>
 
     <main class="main-content">
+        
+        {{#if HasErrorMessage}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                {{#each errorMessage}}
+                    <li>{{this}}</li>
+                {{/each}}
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {{/if}}
+
         {{{body}}}
     </main>
     
