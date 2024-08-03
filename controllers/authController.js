@@ -66,6 +66,7 @@ exports.GetSignup = (req, res, next) => {
         {
             pageTittle: "Signup",
             signupActive: true,
+            
         }
     );
 }
