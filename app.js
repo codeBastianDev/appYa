@@ -54,6 +54,7 @@ const authRoute = require("./routes/auth");
 const homeRoute = require("./routes/home");
 const categories = require("./routes/categories");
 const product = require("./routes/product");
+const commerce = require("./routes/commerce");
 
 app.engine(
     "hbs",
@@ -78,6 +79,7 @@ app.use(authRoute);
 app.use(homeRoute);
 app.use(categories);
 app.use(product);
+app.use(commerce);
 
 //Use Controllers````
 //app.use(roleController);
