@@ -22,58 +22,70 @@
                 </div>
                 
                 <div class="nav flex-column w-100">
-                        <a href="/categoria" class="nav-link text-white text-center py-2">
-                            <i class="fa-duotone fa-solid fa-list"></i>
-                            <p>Categoria</p>
-                        </a>
-
-                        <a href="/product" class="nav-link text-white text-center py-2">
-                            <i class="fa-solid fa-utensils"></i>
-                            <p>Productos</p>
-                        </a>
                     {{#if isAuthenticated}}
-                        <a href="/" class="nav-link text-white text-center py-2">
-                            <i class="fas fa-home mb-2"></i>
-                            <p>Home</p>
-                        </a>
+                        {{#ifEquals userType "customer"}}
+                            <a href="/" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-home"></i>
+                                <p>Home</p>
+                            </a>
+                            <a href="#" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-user"></i>
+                                <p>Profile</p>
+                            </a>
+                            <a href="#" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-box"></i>
+                                <p>My Orders</p>
+                            </a>
+                            <a href="#" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>My Addresses</p>
+                            </a>
+                            <a href="#" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-heart"></i>
+                                <p>My Favorites</p>
+                            </a>
+                        {{/ifEquals}}
+                        {{#ifEquals userType "commerce"}}
+                            <a href="/" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-home"></i>
+                                <p>Home</p>
+                            </a>
+                            <a href="#" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-user"></i>
+                                <p>Profile</p>
+                            </a>
+                            <a href="/categoria" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-th-list"></i>
+                                <p>Category Management</p>
+                            </a>
+                            <a href="/product" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-box"></i>
+                                <p>Product Management</p>
+                            </a>
+                        {{/ifEquals}}
                     {{/if}}
-                    {{#if isAuthenticated}}
-                        <a href="../mantRoles" class="nav-link text-white text-center py-2">
-                            <i class="fas fa-users mb-2"></i>
-                            <p>Usuarios</p>
-                        </a>
-                    {{/if}}
-                    {{#if isAuthenticated}}
-                        <a href="#" class="nav-link text-white text-center py-2">
-                            <i class="fas fa-clipboard-list mb-2"></i>
-                            <p>Pedidos</p>
-                        </a>
-                    {{/if}}
-                    {{#if isAuthenticated}}
-                        <a href="#" class="nav-link text-white text-center py-2">
-                            <i class="fas fa-box mb-2"></i>
-                            <p>Productos</p>
-                        </a>
-                    {{/if}}
-                   
                 </div>
             </div>
 
             {{#if isAuthenticated}}
                 <form action="../logout" method="POST">
                     <button type="submit" class="btn nav-link text-white text-center py-2 w-100">
-                        <i class="fas fa-sign-out-alt mb-2"></i>
+                        <i class="fas fa-sign-out-alt"></i>
                         <p>LogOut</p>
                     </button>
                 </form>
             {{else}}
                 <div class="nav flex-column w-100">
                     <a href="../login" class="nav-link text-white text-center py-2 {{#if loginActive}}active{{/if}}">
-                        <i class="fas fa-sign-in-alt mb-2"></i>
+                        <i class="fas fa-sign-in-alt"></i>
                         <p>Login</p>
                     </a>
+                    <a href="../signupCommerce" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                        <i class="fas fa-store"></i>
+                        <p>Signup Commerce</p>
+                    </a>
                     <a href="../signup" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
-                        <i class="fas fa-sign-in-alt mb-2"></i>
+                        <i class="fas fa-user-plus"></i>
                         <p>Signup</p>
                     </a>
                 </div>
@@ -94,8 +106,8 @@
             </div>
         {{/if}}
         <div class="border rounded-4 p-4 ">
-            {{{body}}}
-        </div>
+        {{{body}}}
+        </div> 
     </main>
     
     {{#if loginActive}}

@@ -1,0 +1,28 @@
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+.btn-custom {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    color: #fff;
+}
+.btn-customer {
+    background-color: #ff6f61;
+    border: none;
+}
+.btn-commerce {
+    background-color: #ff4b4b;
+    border: none;
+}
+.btn-delivery {
+    background-color: #ff0000;
+    border: none;
+}
+.btn-custom:hover {
+    opacity: 0.8;
+}

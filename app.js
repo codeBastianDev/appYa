@@ -6,6 +6,7 @@ const { engine } = require("express-handlebars");
 const db = require("./contexts/cnx");
 const session = require("express-session");
 const flash = require("connect-flash");
+const hbs = require("./utils/handlebars");
 
 //Imports Models
 const Itbis = require("./models/Itbis");
@@ -41,6 +42,7 @@ app.use((req, res, next) =>
     const errors = req.flash("errors");
     res.locals.isAuthenticated = req.session.isLoggedIn;
     res.locals.errorMessage = errors;
+    res.locals.userType = req.session.userType;
     res.locals.HasErrorMessage = errors.length > 0;
     next();
   }
@@ -62,6 +64,7 @@ app.engine(
     })
 );
 
+app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", "views");
 

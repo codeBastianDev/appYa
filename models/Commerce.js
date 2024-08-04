@@ -14,7 +14,7 @@ const Commerces = db.define("commerce", {
         allowNull: false,
     },
     phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
     },
     mail: {

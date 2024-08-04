@@ -1,4 +1,4 @@
-const Products = require('../models/product'); // Asegúrate de ajustar la ruta al modelo de producto
+const Products = require('../models/Product'); // Asegúrate de ajustar la ruta al modelo de producto
 const Commerces = require('../models/Commerce'); // Ajusta la ruta según tu estructura de archivos
 const Categories = require('../models/Category'); // Ajusta la ruta según tu estructura de archivos
 
