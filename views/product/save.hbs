@@ -1,0 +1,45 @@
+<form action="guardar_producto" method="post" enctype="multipart/form-data">
+<h1>New Product</h1>
+<hr>
+
+<div class="mb-3">
+    <input type="file" id="photo" name="photo" class="form-control" >
+</div>
+
+<div class="input-group mb-3">
+    <input type="hidden" name="id" value="{{product.id}}">
+    <input 
+        type="text" 
+        id="cat" 
+        name="nombre" 
+        class="form-control" 
+        placeholder="Name" 
+        required 
+        value="{{product.name}}">
+    <input type="number" name="price" class="form-control" placeholder="precio" value="{{product.price}}">
+    <select name="id_categoria" id="" class="form-control" required>
+        <option value="">Seleccione Categoria</option>
+        {{#each categories}}
+            <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+</div>
+
+<div class="mb-3">
+    <textarea 
+        name="descripcion" 
+        class="form-control" required 
+        name="descripcion" id="" 
+        placeholder="Product Description">{{product.description}}</textarea>
+</div>
+
+<div class="input-group">
+    <a href="product" class="btn btn-danger form-control"><i class="fa-regular fa-circle-xmark"></i></a>
+    <button class="btn btn-success form-control" type="submit"><i class="fa-regular fa-floppy-disk"></i></button>
+</div>
+
+</form>
+
+<script>
+   
+</script>

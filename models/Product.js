@@ -40,6 +40,8 @@ const Products = db.define("product", {
         references: {
             model: Categories,
             key: "id",
+            onDelete: "CASCADE",  
+            onUpdate: "CASCADE" 
         }
     },
 });

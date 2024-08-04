@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+
 const app = express();
 const { engine } = require("express-handlebars");
 const db = require("./contexts/cnx");
@@ -27,6 +28,9 @@ const ErrorController = require("./controllers/errorController");
 //const authController = require("./controllers/roleController");
 
 //Middlewares
+app.use(express.text());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 app.use(session({secret:"anything", resave:true, saveUninitialized:true}));
 
@@ -46,6 +50,8 @@ app.use((req, res, next) =>
 const roleRoute = require("./routes/role");
 const authRoute = require("./routes/auth");
 const homeRoute = require("./routes/home");
+const categories = require("./routes/categories");
+const product = require("./routes/product");
 
 app.engine(
     "hbs",
@@ -67,8 +73,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(roleRoute);
 app.use(authRoute);
 app.use(homeRoute);
+app.use(categories);
+app.use(product);
 
-//Use Controllers
+//Use Controllers````
 //app.use(roleController);
 //app.use(authController);
 app.use("/", ErrorController.Get404);

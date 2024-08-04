@@ -24,11 +24,15 @@ const Categories = db.define("category", {
         references: {
             model: Commerces,
             key: "id",
+            onDelete: "CASCADE",  
+            onUpdate: "CASCADE" 
         }
     },
 });
 
-Categories.belongsTo(Commerces, { foreignKey: "commerceId" });
+Categories.belongsTo(Commerces, { 
+    foreignKey: "commerceId", 
+});
 
 
 module.exports = Categories;

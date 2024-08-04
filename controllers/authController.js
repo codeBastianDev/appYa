@@ -1,5 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const helper = require("../utils/helper")
+
+
 
 //Login and LogOut
 exports.GetLogin = (req, res, next) => {
@@ -72,7 +75,7 @@ exports.GetSignup = (req, res, next) => {
 }
 
 exports.PostSignup = (req, res, next) => {
-
+    let Image = helper.saveImage(req.file)
     const username = req.body.username;
     const password = req.body.password;
     const confirmpassword = req.body.confirmpassword;
@@ -80,9 +83,9 @@ exports.PostSignup = (req, res, next) => {
     const lastname = req.body.lastname;
     const mail = req.body.mail;
     const phone = req.body.phone;
-    const photo = req.body.photo;
+    const photo = Image;
     const dni = req.body.dni;
-
+   
     if(password !== confirmpassword)
     {
         req.flash("errors","Password and Confirmpassword dont match");

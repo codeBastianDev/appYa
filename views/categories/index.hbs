@@ -1,0 +1,48 @@
+<div>
+   <h2>Category</h2>
+   <hr>
+   <a href="guardar_categoria" class="d-block w-100"><button class="btn btn-primary w-100">New</button></a>
+    <br>
+  <table class="table ">
+    <thead class="table-danger text-center">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+        {{#each categories}}
+        <tr id="{{this.id}}">
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.description}}</td>
+            <td>
+                <a href="guardar_categoria?id={{this.id}}" class="btn btn-info"><i class="fa-solid fa-pen"></i></a>
+                <button href="" class="btn btn-danger" onclick="eliminar({{this.id}})"><i class="fa-solid fa-trash"></i> </button>
+            </td>
+        </tr>
+        {{/each }}
+    </tbody>
+  </table>
+  
+</div>
+
+<script>
+      eliminar = (id) =>{ res = confirm("Seguro que desea eliminar esta categoria")
+      
+  if(res){ 
+    fetch('/delete_categoria', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id :id
+      })
+    })
+    document.getElementById(id).remove()
+  }
+}
+</script>
