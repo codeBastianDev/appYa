@@ -47,6 +47,8 @@ const Commerces = db.define("commerce", {
         references: {
             model: TypeCommerces,
             key: "id",
+            onDelete: "CASCADE",  
+            onUpdate: "CASCADE" 
         }
     },
 });
