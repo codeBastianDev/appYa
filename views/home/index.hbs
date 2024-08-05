@@ -1,9 +1,24 @@
 {{#if isAuthenticated}}
     {{#ifEquals userType "commerce"}}
-      <h1>Welcome to PedidosYa commerce</h1>
+        <h1>Welcome to PedidosYa commerce</h1>
     {{/ifEquals}}
     {{#ifEquals userType "customer"}}
-      <h1>Welcome to PedidosYa customer</h1>
+        <h1>Welcome to PedidosYa customer</h1>
+
+        <h1 class="mb-4">Types of Commerce</h1>
+        <div class="row">
+            {{#each typeCommerces}}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <img src="{{this.icon}}" class="card-img-top" alt="{{this.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <a href="/listcommerce/{{this.id}}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
     {{/ifEquals}}
 {{else}}
     <h1>You must log in</h1>

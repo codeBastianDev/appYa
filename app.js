@@ -55,6 +55,7 @@ const homeRoute = require("./routes/home");
 const categories = require("./routes/categories");
 const product = require("./routes/product");
 const commerce = require("./routes/commerce");
+const typecommerce = require("./routes/typecommerce");
 
 app.engine(
     "hbs",
@@ -80,6 +81,7 @@ app.use(homeRoute);
 app.use(categories);
 app.use(product);
 app.use(commerce);
+app.use(typecommerce);
 
 //Use Controllers````
 //app.use(roleController);

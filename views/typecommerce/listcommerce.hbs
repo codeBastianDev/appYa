@@ -1,0 +1,48 @@
+<div class="container mt-4">
+    <!-- Button to go back to the home page -->
+    <a href="/" class="btn btn-secondary mb-3">Back to Home</a>
+
+    <!-- Form to search commerces by name -->
+    <form class="mb-3" method="GET" action="{{url}}">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search commerces by name" value="{{searchQuery}}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Counter of commerces -->
+    <h2 class="mt-4">Commerces</h2>
+    <hr>
+    <p>{{commerces.length}} commerces found</p>
+    <a href="/add_commerce" class="d-block w-100 mb-3"><button class="btn btn-primary w-100">New Commerce</button></a>
+
+    <!-- List of commerces -->
+    <table class="table">
+        <thead class="table-danger text-center">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Favorite</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {{#each commerces}}
+            <tr id="{{this.id}}">
+                <td>
+                    <a href="/commerce/{{this.id}}/products" class="text-decoration-none text-dark">
+                        <img src="uploads/poro.jpeg" alt="{{this.name}}" class="img-thumbnail" style="width: 50px; height: 50px;">
+                    </a>
+                </td>
+                <td>{{this.name}}</td>
+                <td>
+                    <form action="/favorite/{{this.id}}" method="POST">
+                        <button type="submit" class="btn btn-link p-0">
+                            <i class="fa{{#if this.isFavorite}}s{{else}}r{{/if}} fa-heart" style="color:{{#if this.isFavorite}}red{{else}}gray{{/if}}; font-size: 1.5rem;"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

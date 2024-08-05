@@ -18,7 +18,7 @@ exports.index = async (req, res) => {
 // Método para renderizar la vista de guardar comercio
 exports.save = async (req, res) => {
   
-    var id = 1;
+    var id = req.session.user.id;
 
     tipo = await TypeCommerces.findAll();
     if (id > 0) {

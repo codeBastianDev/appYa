@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <!-- Button to go back to the commerces page -->
+    <a href="/commerces" class="btn btn-secondary mb-3">Back to Commerces</a>
+
+    <!-- Commerce Name and Details -->
+    <h2>{{commerce.name}}</h2>
+    <p>{{commerce.description}}</p>
+    <hr>
+
+    <div class="row">
+        <!-- Products Section -->
+        <div class="col-md-8">
+            {{#each categories}}
+                <h3 class="mt-4">{{this.name}}</h3>
+                <div class="row">
+                    {{#each this.products}}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <img src="uploads/{{this.photo}}" class="card-img-top" alt="{{this.name}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{this.name}}</h5>
+                                    <p class="card-text">{{this.description}}</p>
+                                    <p class="card-text"><strong>${{this.price}}</strong></p>
+                                    <button class="btn btn-primary add-to-cart" data-id="{{this.id}}">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+
+        <!-- Cart Section -->
+        <div class="col-md-4">
+            <h3>Shopping Cart</h3>
+            <div id="cart">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <p id="total-price"><strong>Total: $0.00</strong></p>
+            <button class="btn btn-success w-100" id="checkout">Checkout</button>
+        </div>
+    </div>
+</div>

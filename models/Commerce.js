@@ -55,4 +55,5 @@ const Commerces = db.define("commerce", {
 
 Commerces.belongsTo(TypeCommerces, { foreignKey: "idTypeCommerce"});
 
+
 module.exports = Commerces;

@@ -6,10 +6,11 @@ const upload = multer({ dest: 'public/uploads' })
 // Subir imagen
 
 const controllers = require("../controllers/commerceController")
+const isAuth = require("../middlewares/is-auth")
 
 // router.get('/profileComercio', controllers.index)
-router.get('/profileComercio',controllers.save)
-router.post('/guardar_comercio',upload.single('photo'),controllers.insert)
-router.post('/delete_producto',controllers.delete)
+router.get('/profileComercio',isAuth, controllers.save)
+router.post('/guardar_comercio',isAuth, upload.single('photo'),controllers.insert)
+router.post('/delete_producto',isAuth, controllers.delete)
 
 module.exports = router;
