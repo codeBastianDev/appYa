@@ -10,5 +10,7 @@ const isAuth = require("../middlewares/is-auth")
 
 router.get('/profileCustomer',isAuth, customerController.GetProfile);
 router.post('/save_customer',isAuth, upload.single('photo'),customerController.insert)
+router.get("/customer/favorite",isAuth,customerController.GetFavorites);
+router.post('/delete_favorite',isAuth, customerController.delete);
 
 module.exports = router;

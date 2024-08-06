@@ -4,14 +4,12 @@
     {{/ifEquals}}
     {{#ifEquals userType "customer"}}
         <h1>Welcome to PedidosYa customer</h1>
-
         <h1 class="mb-4">Types of Commerce</h1>
         <div class="row">
             {{#each typeCommerces}}
                 <div class="col-md-4 mb-3">
                     <div class="card">
-                        
-                        <img src="{{this.photo}}" class="w-50" alt="{{this.name}}">
+                        <img src="{{this.photo}}" alt="{{this.name}}">
                         <div class="card-body">
                             <h5 class="card-title">{{this.name}}</h5>
                             <a href="/listcommerce/{{this.id}}" class="btn btn-primary">View Details</a>

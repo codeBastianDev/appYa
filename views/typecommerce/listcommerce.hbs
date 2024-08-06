@@ -14,12 +14,11 @@
     <h2 class="mt-4">Commerces</h2>
     <hr>
     <p>{{commerces.length}} commerces found</p>
-    {{!-- <a href="/add_commerce" class="d-block w-100 mb-3"><button class="btn btn-primary w-100">New Commerce</button></a> --}}
-
-    <!-- List of commerces -->
-
+    
+    <!-- Pagination -->
+    <div class="d-flex justify-content-around">
             {{#each commerces}}
-            
+
             <div class="card" style="width: 18rem;" id="{{this.id}}">
                 <img src="/{{this.photo}}" class="card-img-top p-4" height="250" width="200" alt="...">
                 <div class="card-body">
@@ -35,5 +34,5 @@
                 </div>
             </div>
             {{/each}}
-      
+    </div>
 </div>
