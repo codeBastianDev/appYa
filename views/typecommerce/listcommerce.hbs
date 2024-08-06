@@ -17,32 +17,23 @@
     {{!-- <a href="/add_commerce" class="d-block w-100 mb-3"><button class="btn btn-primary w-100">New Commerce</button></a> --}}
 
     <!-- List of commerces -->
-    <table class="table">
-        <thead class="table-danger text-center">
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Favorite</th>
-            </tr>
-        </thead>
-        <tbody class="text-center">
+
             {{#each commerces}}
-            <tr id="{{this.id}}">
-                <td>
-                    <a href="/commerce/{{this.id}}/products" class="text-decoration-none text-dark">
-                        <img src="uploads/poro.jpeg" alt="{{this.name}}" class="img-thumbnail" style="width: 50px; height: 50px;">
-                    </a>
-                </td>
-                <td>{{this.name}}</td>
-                <td>
-                    <form action="/favorite/{{this.id}}" method="POST">
-                        <button type="submit" class="btn btn-link p-0">
-                            <i class="fa{{#if this.isFavorite}}s{{else}}r{{/if}} fa-heart" style="color:{{#if this.isFavorite}}red{{else}}gray{{/if}}; font-size: 1.5rem;"></i>
-                        </button>
-                    </form>
-                </td>
-            </tr>
+            
+            <div class="card" style="width: 18rem;" id="{{this.id}}">
+                <img src="/{{this.photo}}" class="card-img-top p-4" height="250" width="200" alt="...">
+                <div class="card-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="/commerce/{{this.id}}/products" class="btn btn-primary w-75">Visitar</a>
+                        <form action="/favorite/{{this.id}}" method="POST">
+                            <button type="submit" class="btn btn-link p-0">
+                                <i class="fa{{#if this.isFavorite}}s{{else}}r{{/if}} fa-heart" style="color:{{#if this.isFavorite}}red{{else}}gray{{/if}}; font-size: 1.5rem;"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             {{/each}}
-        </tbody>
-    </table>
+      
 </div>

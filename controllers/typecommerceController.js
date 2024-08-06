@@ -44,7 +44,7 @@ const { Op } = require('sequelize');
 exports.GetCommercesByType = async (req, res, next) => {
     const typeId = req.params.typeId;
     const searchQuery = req.query.search || '';
-    const userId = req.user ? req.user.id : null; // Obtén el ID del usuario desde la sesión
+    const userId = req.session.user.id; // Obtén el ID del usuario desde la sesión
 
     try {
         // Encuentra todos los comercios que coincidan con el tipo y la búsqueda
@@ -67,20 +67,22 @@ exports.GetCommercesByType = async (req, res, next) => {
 
         // Verifica si cada comercio está en la lista de favoritos del usuario
         const commerceData = await Promise.all(commerces.map(async commerce => {
+       
             const isFavorite = userId ? await Favorite.findOne({
                 where: {
                     userId: userId,
                     commerceId: commerce.id
                 }
             }) : null;
-
+            console.log(isFavorite,"<- GPT DE nestor");
             return {
                 ...commerce.dataValues,
-                isFavorite: !!isFavorite
+                isFavorite: isFavorite
             };
         }));
 
         // Enviar el valor de isFavorite como una variable de contexto para la vista
+      
         res.render("typecommerce/listcommerce", {
             pageTitle: "Commerces",
             typeActive: true,

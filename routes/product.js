@@ -12,6 +12,5 @@ router.get('/product',isAuth, controllers.index);
 router.get('/guardar_producto',isAuth, controllers.save);
 router.post('/guardar_producto',isAuth, upload.single('photo'),controllers.insert);
 router.post('/delete_producto',isAuth, controllers.delete);
-router.get("/commerce/:commerceId/products",controllers.listByCommerce);
 
 module.exports = router;

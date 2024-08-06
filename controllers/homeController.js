@@ -9,7 +9,7 @@ exports.GetAll = (req,res,next) => {
             return res.redirect("/home/index");
         }
         const typeCommerces = result.map((result) => result.dataValues);
-
+       
         res.render("home/index",
             {
                 pageTittle: "Home",
