@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Mis Direcciones</h1>
+
+    <div class="mb-4">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/address/create'">Crear Dirección</button>
+    </div>
+
+    {{#each addresses}}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{this.street}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <button type="button" class="btn btn-warning" onclick="window.location.href='/address/edit/{{this.id}}'">Editar</button>
+            <form action="/address/delete/{{this.id}}" method="post" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta dirección?');">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+    {{/each}}
+</div>
+

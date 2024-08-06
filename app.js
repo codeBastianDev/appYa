@@ -56,6 +56,8 @@ const categories = require("./routes/categories");
 const product = require("./routes/product");
 const commerce = require("./routes/commerce");
 const typecommerce = require("./routes/typecommerce");
+const customer = require("./routes/customer");
+const address = require("./routes/address");
 
 app.engine(
     "hbs",
@@ -82,6 +84,8 @@ app.use(categories);
 app.use(product);
 app.use(commerce);
 app.use(typecommerce);
+app.use(customer);
+app.use(address);
 
 //Use Controllers````
 //app.use(roleController);

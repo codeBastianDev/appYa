@@ -1,0 +1,80 @@
+<form action="/save_customer" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="id" value="{{profile.id}}">
+
+    <div class="col-md-12 mb-4">
+        {{#if profile.photo}}
+            <img src="{{profile.photo}}" alt="Profile Photo" class="rounded mx-auto d-block" width="200">
+        {{else}}
+            <img src="https://placehold.co/400" alt="Placeholder" class="rounded mx-auto d-block" width="200">
+        {{/if}}
+    </div>
+
+    <div class="row g-2 mb-4">
+        <div class="col-md">
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="firstname"
+                    id="firstname"
+                    required
+                    placeholder="firstname"
+                    value="{{profile.firstname}}"
+                />
+                <label for="firstname">firstname</label>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="lastname"
+                    id="lastname"
+                    required
+                    placeholder="lastname"
+                    value="{{profile.lastname}}"
+                />
+                <label for="lastname">lastname</label>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="phone"
+                    id="phone"
+                    required
+                    placeholder="phone"
+                    value="{{profile.phone}}"
+                />
+                <label for="phone">phone</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-2 mb-4">
+        <div class="col-md">
+            <div class="form-floating">
+                <input
+                    type="file"
+                    class="form-control"
+                    id="photo"
+                    name="photo"
+                />
+                <label for="photo">photo</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-2 mb-4">
+        <div class="col-md">
+            <button type="button" class="btn btn-secondary w-100" onclick="window.location.href='/'">Come Back</button>
+        </div>
+        <div class="col-md">
+            <button type="submit" class="btn btn-primary w-100">Save</button>
+        </div>
+    </div>
+</form>

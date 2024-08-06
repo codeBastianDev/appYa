@@ -1,0 +1,27 @@
+<form action="/address/edit/{{address.id}}" method="post">
+    <h1>Editar Dirección</h1>
+    <hr>
+
+    <div class="input-group mb-3">
+        <input 
+            type="text" 
+            id="street" 
+            name="street" 
+            class="form-control" 
+            placeholder="Nombre de la calle" 
+            required 
+            value="{{address.street}}">
+    </div>
+
+    <div class="mb-3">
+        <textarea 
+            name="description" 
+            class="form-control" 
+            placeholder="Descripción de la dirección">{{address.description}}</textarea>
+    </div>
+
+    <div class="input-group">
+        <a href="/address" class="btn btn-danger form-control"><i class="fa-regular fa-circle-xmark"></i></a>
+        <button class="btn btn-success form-control" type="submit"><i class="fa-regular fa-floppy-disk"></i></button>
+    </div>
+</form>

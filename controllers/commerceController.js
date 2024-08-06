@@ -40,7 +40,7 @@ exports.save = async (req, res) => {
 // Método para insertar o actualizar un comercio
 exports.insert = async (req, res) => {
     let campo_photo = {};
-    const { id, nombre, telefono, correo, contrasena,  open, close, tipo } = req.body;
+    const { id, nombre, telefono, correo,  open, close, tipo } = req.body;
     if(req.file != undefined){
         photo = req.file
         photo = helper.saveImage(photo);
@@ -54,7 +54,6 @@ exports.insert = async (req, res) => {
                 name:nombre,
                 phone:telefono,
                 mail:correo,
-                password:contrasena,
                 openTime:open,
                 closeTime:close,
                 isActive:1,
