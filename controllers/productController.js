@@ -59,7 +59,7 @@ exports.insert = async (req, res) => {
                 name:nombre,
                 description:descripcion,
                 price:price,
-                commerceId:1,
+                commerceId:req.session.user.id,
                 categoryId:id_categoria,
                 campo_photo
             }, {
@@ -76,7 +76,7 @@ exports.insert = async (req, res) => {
                 name:nombre,
                 description:descripcion,
                 price:price,
-                commerceId:1,
+                commerceId:req.session.user.id,
                 categoryId:id_categoria
             });
         } catch (error) {

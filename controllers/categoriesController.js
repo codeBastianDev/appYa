@@ -39,7 +39,7 @@ exports.insert = async (req,res)=>{
         await model.update({
             name:nombre,
             description:descripcion,
-            commerceId:1
+            commerceId:req.session.user.id
         },{where:{
             id:id
         }})
@@ -49,7 +49,7 @@ exports.insert = async (req,res)=>{
             await model.create({
                 name: nombre,
                 description:descripcion,
-                commerceId:1
+                commerceId:req.session.user.id
             });
       
         exports.index(req, res);
