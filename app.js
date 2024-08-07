@@ -86,6 +86,7 @@ app.use(commerce);
 app.use(typecommerce);
 app.use(customer);
 app.use(address);
+app.use(admin);
 
 //Use Controllers````
 //app.use(roleController);

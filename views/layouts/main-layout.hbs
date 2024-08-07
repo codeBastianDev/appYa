@@ -68,6 +68,30 @@
                                 <i class="fas fa-home"></i>
                                 <p>Home</p>
                             </a>
+                            <a href="/listcustomer" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                                <i class="fa-solid fa-users"></i>
+                                <p>List Customer</p>
+                            </a>
+                            <a href="/listdelivery" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                                <i class="fa-solid fa-truck"></i>
+                                <p>List Delivery</p>
+                            </a>
+                            <a href="/listcommerce" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                                <i class="fa-solid fa-store"></i>
+                                <p>List Commerce</p>
+                            </a>
+                            <a href="../setting" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                                <i class="fa-solid fa-gears"></i>
+                                <p>Settings</p>
+                            </a>
+                            <a href="/listadmin" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <p>Mant Admin</p>
+                            </a>
+                            {{!-- <a href="../signupAdmin" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Signup Admin</p>
+                            </a> --}}
                         {{/ifEquals}}
                     {{/if}}
                 </div>
@@ -89,12 +113,6 @@
                     <a href="../signupCommerce" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
                         <i class="fas fa-store"></i>
                         <p>Signup Commerce</p>
-                    </a>
-
-                    {{!-- luego hay que moverlo para que solo lo vea el admin --}}
-                    <a href="../signupAdmin" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
-                        <i class="fas fa-store"></i>
-                        <p>Signup Admin</p>
                     </a>
 
                     <a href="../signup" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
