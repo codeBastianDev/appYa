@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Commerce = require("../models/Commerce");
+const TypeCommerce = require("../models/TypeCommerce");
 const bcrypt = require("bcryptjs");
 const helper = require("../utils/helper");
 
@@ -82,12 +83,22 @@ exports.GetSignup = (req, res, next) => {
   });
 };
 
+
 exports.GetSignupCommerce = (req, res, next) => {
-  res.render("auth/signupCommerce", {
-    pageTittle: "SignupCommerce",
-    signupActive: true,
-  });
+  TypeCommerce.findAll()
+    .then((typeCommerces) => {
+      res.render("auth/signupCommerce", {
+        pageTittle: "SignupCommerce",
+        signupActive: true,
+        typeCommerces: typeCommerces.map(type => type.toJSON())
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect("/");
+    });
 };
+
 
 exports.PostSignup = (req, res, next) => {
   let Image = helper.saveImage(req.file);
@@ -253,7 +264,7 @@ exports.PostSignupAdmin = (req, res) => {
           isActive: true,
         })
        .then((result) => {
-          res.redirect("/login");
+          res.redirect("/listadmin");
         })
        .catch((err) => {
           console.log(err);

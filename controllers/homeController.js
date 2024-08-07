@@ -1,26 +1,55 @@
 const TypeCommerce = require("../models/TypeCommerce");
+const Orders = require("../models/Order");
+const Commerces = require("../models/Commerce");
+const { Op } = require("sequelize");
+const Users = require("../models/User");
+const Products = require("../models/Product");
 
-exports.GetAll = (req,res,next) => {
-    
-    TypeCommerce.findAll()
-    .then((result) => {
-        if(!result){
-            req.flash("errors", "Dont have any");
-            return res.redirect("/home/index");
-        }
-        const typeCommerces = result.map((result) => result.dataValues);
-       
-        res.render("home/index",
-            {
-                pageTittle: "Home",
-                homeActive: true,
-                typeCommerces: typeCommerces,
+exports.GetAll = async (req, res, next) => {
+    try {
+        const typeCommercesResult = await TypeCommerce.findAll();
+        const typeCommerces = typeCommercesResult.map(result => result.dataValues);
+        
+        // Obtener cantidades de pedidos
+        const totalOrders = await Orders.count();
+        const todayOrders = await Orders.count({
+            where: {
+                createdAt: {
+                    [Op.gte]: new Date().setHours(0, 0, 0, 0),
+                    [Op.lt]: new Date().setHours(23, 59, 59, 999)
+                }
             }
-        );
-    })
-    .catch((error) => {
-        console.error("Error fetching types:", error);
-        req.flash("errors", "Error fetching types");
+        });
+
+        // Obtener cantidades de comercios activos e inactivos
+        const activeCommerces = await Commerces.count({ where: { isActive: true } });
+        const inactiveCommerces = await Commerces.count({ where: { isActive: false } });
+
+        const activeCustomers = await Users.count({ where: { roleId: 1, isActive: true } });
+        const inactiveCustomers = await Users.count({ where: { roleId: 1, isActive: false } });
+
+        const activeDeliveries = await Users.count({ where: { roleId: 3, isActive: true } });
+        const inactiveDeliveries = await Users.count({ where: { roleId: 3, isActive: false } });
+
+        const totalProducts = await Products.count();
+
+        res.render("home/index", {
+            pageTitle: "Home",
+            homeActive: true,
+            typeCommerces: typeCommerces,
+            totalOrders: totalOrders,
+            todayOrders: todayOrders,
+            activeCommerces: activeCommerces,
+            inactiveCommerces: inactiveCommerces,
+            activeCustomers: activeCustomers,
+            inactiveCustomers: inactiveCustomers,
+            activeDeliveries: activeDeliveries,
+            inactiveDeliveries: inactiveDeliveries,
+            totalProducts : totalProducts,
+        });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        req.flash("errors", "Error fetching data");
         res.redirect("/home/index");
-    });
+    }
 };

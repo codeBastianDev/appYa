@@ -86,6 +86,7 @@ app.use(commerce);
 app.use(typecommerce);
 app.use(customer);
 app.use(address);
+app.use(admin);
 
 //Use Controllers````
 //app.use(roleController);
@@ -93,7 +94,7 @@ app.use(address);
 app.use("/", ErrorController.Get404);
 
 //  Sincronizando connection
-db.sync({force: true})
+db.sync()
 .then(()=>{
     console.log('Database Connection was successfully');
 

@@ -1,28 +1,109 @@
 {{#if isAuthenticated}}
     {{#ifEquals userType "commerce"}}
-        <h1>Welcome to PedidosYa commerce</h1>
+        <div class="container text-center my-5">
+            <h1 class="display-4">Welcome to PedidosYa commerce</h1>
+        </div>
     {{/ifEquals}}
     {{#ifEquals userType "customer"}}
-        <h1>Welcome to PedidosYa customer</h1>
-        <h1 class="mb-4">Types of Commerce</h1>
-        <div class="row">
-            {{#each typeCommerces}}
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img src="{{this.photo}}" alt="{{this.name}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.name}}</h5>
-                            <a href="/listcommerce/{{this.id}}" class="btn btn-primary">View Details</a>
+        <div class="container my-5">
+            <h1 class="display-4 mb-4">Welcome to PedidosYa customer</h1>
+            <h2 class="mb-4">Types of Commerce</h2>
+            <div class="row">
+                {{#each typeCommerces}}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <img src="{{this.photo}}" class="card-img-top" alt="{{this.name}}">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{this.name}}</h5>
+                                <a href="/listcommerce/{{this.id}}" class="btn btn-primary mt-auto">View Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{/each}}
+                {{/each}}
+            </div>
         </div>
     {{/ifEquals}}
     {{#ifEquals userType "admin"}}
-      <h1>Welcome to PedidosYa admin</h1>
+        <div class="container my-5">
+            <h1 class="display-4 mb-4">Welcome to PedidosYa admin</h1>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Orders</h5>
+                            <p class="card-text">{{totalOrders}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Orders Today</h5>
+                            <p class="card-text">{{todayOrders}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Active Commerces</h5>
+                            <p class="card-text">{{activeCommerces}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Inactive Commerces</h5>
+                            <p class="card-text">{{inactiveCommerces}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Active Customers</h5>
+                            <p class="card-text">{{activeCustomers}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Inactive Customers</h5>
+                            <p class="card-text">{{inactiveCustomers}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Active Deliveries</h5>
+                            <p class="card-text">{{activeDeliveries}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Inactive Deliveries</h5>
+                            <p class="card-text">{{inactiveDeliveries}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-light text-center" style="background-color: #f8d7da;">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Products</h5>
+                            <p class="card-text">{{totalProducts}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/ifEquals}}
-
 {{else}}
-    <h1>You must log in</h1>
+    <div class="container text-center my-5">
+        <h1 class="display-4">You must log in</h1>
+    </div>
 {{/if}}
