@@ -1,7 +1,9 @@
 {{#if isAuthenticated}}
     {{#ifEquals userType "commerce"}}
-<<<<<<< HEAD
-        <h1>Welcome to PedidosYa commerce</h1>
+
+     <div class="container text-center my-5">
+            <h1 class="display-4">Welcome to PedidosYa commerce</h1>
+    </div>
             
         <div>
             {{#each order}}
@@ -18,11 +20,8 @@
                     </div>
                 </a>
             {{/each}}
-=======
-        <div class="container text-center my-5">
-            <h1 class="display-4">Welcome to PedidosYa commerce</h1>
->>>>>>> 9a27163dc9b9442b938cb4a9d6d8fe92c361c796
-        </div>
+
+   
     {{/ifEquals}}
     {{#ifEquals userType "customer"}}
         <div class="container my-5">
