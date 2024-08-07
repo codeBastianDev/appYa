@@ -1,7 +1,11 @@
 const Users = require("../models/User");
 const Favorites = require("../models/Favorite");
 const Commerces = require("../models/Commerce");
+const order = require("../models/Order");
 const helper = require("../utils/helper");
+const OrderDetails = require("../models/OrderDetail");
+const db = require('../contexts/cnx');
+const { where } = require('sequelize');
 
 exports.GetProfile = async (req, res) => {
   var id = req.session.user.id;
@@ -94,3 +98,86 @@ exports.delete = async(req,res)=>{
         }
     });
 }
+
+
+exports.order = async(req,res)=>{
+  id = req.session.user.id;
+  var query =`SELECT c.name nombre,
+                     o.id,
+                     DATE_FORMAT(o.createdAt,'%d %M %h:%i') fecha,
+                     o.total,
+                     c.photo foto,
+                     COUNT(p.name) pedidos,
+                      case 
+                        WHEN o.status = 1  THEN 'PENDIENTE'
+                        WHEN o.status = 2  THEN 'PROCESO' 
+                        WHEN o.status = 2  THEN 'COMPLETO' 
+                      END estado
+                  FROM commerces c
+                  JOIN orders o on o.commerceId = c.id
+                  JOIN orderdetails od on od.orderId = o.id
+                  JOIN products p ON p.id = od.productId
+                  WHERE o.userId = ${id}
+                  GROUP by o.id`;
+
+   result =  await db.query(query)
+    
+   res.render("customer/order",{order:result[0].map(r =>r )})
+}
+
+exports.orderView = async(req,res)=>{
+  id = req.session.user.id;
+  orderID = req.params.id;
+
+  var query =`SELECT c.name,o.id nombre,
+                     DATE_FORMAT(o.createdAt,'%d %M %h:%i') fecha,
+                     o.createdAt,
+                     o.total,
+                     p.name producto,
+                     p.price precio,
+                     p.photo fotoProducto,
+                      case
+                        WHEN o.status = 1  THEN 'Pendiente'
+                        WHEN o.status = 2  THEN 'PROCESO'
+                        WHEN o.status = 2  THEN 'COMPLETO'
+                      END estado
+                  FROM commerces c
+                  JOIN orders o on o.commerceId = c.id
+                  JOIN orderdetails od on od.orderId = o.id
+                  JOIN products p ON p.id = od.productId
+                  WHERE o.userId = ${id} and o.id = ${orderID}`;
+  result = await db.query(query)
+
+  dato = {
+      comercio: result[0][0].name,
+      fecha:  result[0][0].fecha,
+      estado: result[0][0].estado
+  }
+  res.render('customer/detalleOrder',{order:result[0].map(r => r ),dato:dato})
+}
+
+exports.orderCliente = async(req,res)=>{
+  id = req.session.user.id;
+  var query =`SELECT c.name nombre,
+                     o.id,
+                     DATE_FORMAT(o.createdAt,'%d %M %h:%i') fecha,
+                     o.total,
+                     c.photo foto,
+                     COUNT(p.name) pedidos,
+                      case 
+                        WHEN o.status = 1  THEN 'PENDIENTE'
+                        WHEN o.status = 2  THEN 'PROCESO' 
+                        WHEN o.status = 2  THEN 'COMPLETO' 
+                      END estado
+                  FROM commerces c
+                  JOIN orders o on o.commerceId = c.id
+                  JOIN orderdetails od on od.orderId = o.id
+                  JOIN products p ON p.id = od.productId
+                  WHERE c.id = ${id}
+                  GROUP by o.id`;
+
+   result =  await db.query(query)
+    
+   res.render("customer/order",{order:result[0].map(r =>r )})
+}
+

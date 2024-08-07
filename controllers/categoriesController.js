@@ -7,7 +7,10 @@ exports.index = async (req,res)=>{
      let result =   await model.findAll({
             include:[{
                 model: commerces
-            }]
+            }],
+            where:{
+                commerceId:req.session.user.id
+            }
         })
         res.render('categories/',{categories:result.map(instance => instance.toJSON())})
 

@@ -1,74 +1,141 @@
-<div class="container mt-4">
-    <!-- Button to go back to the commerces page -->
-    <a href="/commerces" class="btn btn-secondary mb-3">Back to Commerces</a>
-
-    <!-- Commerce Name and Details -->
-    <h2>{{commerce.name}}</h2>
-    <p>{{commerce.description}}</p>
-    <hr>
-
+<div class="container-fluid mt-4">
+  <!-- Button to go back to the commerces page -->
+  <a href="/commerces" class="btn btn-secondary mb-3">Back to Commerces</a>
+<div class="row">
+    <div class="col">
+   
         {{#each list_producto}}
         <div class="row mb-3">
-             <h2>{{categoria}}</h2>
-        <hr>
-        <div class="d-flex justify-content-evenly">
+            <h2>{{categoria}}</h2>
+            <hr />
+            <div class="d-flex justify-content-evenly">
             {{#each productos}}
-          
-
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                    <img src="/{{photo}}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{name}}</h5>
-                        <p class="card-text">{{description}}</p>
-                        <p class="card-text"><small class="text-body-secondary">$DO.{{price}}</small></p>
-                        <button class="btn btn-primary w-100" onclick="addCarrito({{id}})">Agregar</button>
-                    </div>
+                <div class="card mb-3" id="card-{{id}}" style="max-width: 350px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                        <img
+                            src="/{{photo}}"
+                            class="img-fluid rounded-start h-100 w-100"
+                            alt="..."
+                        />
+                        </div>
+                        <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title nombre">{{name}}</h5>
+                            <p class="card-text">{{description}}</p>
+                            <p class="card-text"><small
+                                class="text-body-secondary"
+                            >$DO <span class="precio">{{price}}</span> </small></p>
+                            <span id="contenedor-btn-{{id}}">
+                                    <button
+                                class="btn btn-primary btn-{{id}} w-100"
+                                onclick="addCarrito({{id}})"
+                                >Agregar</button>
+                            </span>
+                        </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-             {{/each}}
+            {{/each}}
+            </div>
         </div>
-        </div>
-       
         {{/each}}
-   
-    <button id="cart-button"></button>
+    </div>
+    <div class="col">
+        <div class="card p-4 border rounded-4">
+            <h4>Mis pedidos</h4>
+            <div class="card-body">
+               <div class="contenedor-pedidos">
+                    
+               </div>
+                <hr>
+                <div class="d-flex p-2 justify-content-between align-items-center">
+                    <div>SubTotal</div>
+                    <div id="total_pagar">$0.00</div>
+                </div>
+                <div>
+                    <button onclick="pagar()" class="btn btn-primary w-100">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<style>
-        #cart-button{
-             width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #ff6600;
-            color: white;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-</style>
+</div>
+
+
 
 <script>
-    const carrito = [];
-    function addCarrito(id) {
-    const index = carrito.indexOf(id);
-    if (index !== -1) {
-        carrito.splice(index, 1);
-     
+  const carrito = []; 
+  function addCarrito(id) { 
+    var  elemento ="";
+    document.querySelector(`.btn-${id}`).remove()
+    const index = carrito.indexOf(id); 
+    if (index !== -1) { 
+      
+        carrito.splice(index, 1); 
     } else {
-        carrito.push(id);
-     
-    }
-    document.getElementById('cart-button').textContent = carrito.length
-}
+        carrito.push(id); 
+          var tota_pagar = 0;
+          carrito.forEach( e =>{
+            
+            producto = document.getElementById(`card-${e}`)
+            console.log(producto)
+            precio = producto.querySelector(".precio").textContent
+            nombre = producto.querySelector(".nombre").textContent
+            tota_pagar +=  parseInt(precio);
 
+            elemento += `<div class="border border-2 rounded-4 mb-3 " id="carrito-${e}">
+                    <div class="d-flex p-2 justify-content-around align-items-center">
+                        <div>${nombre}</div>
+                        <div>$${precio}</div>
+                        <div> <button class="btn btn-danger" onclick='eliminar(${e})'><i class="fa fa-trash"></i></button></div>
+                    </div>
+                </div>`
+        })
+       
+       document.querySelector(".contenedor-pedidos").innerHTML = elemento;
+       document.getElementById("total_pagar").innerHTML = `$${tota_pagar}`
+     
+    } 
+            
+    }
+  
+  function eliminar(id){
+     var  elemento ="";
+    document.getElementById(`carrito-${id}`).remove()
+    document.getElementById(`contenedor-btn-${id}`).innerHTML = `<button
+                                class="btn btn-primary btn-${id} w-100"
+                                onclick="addCarrito(${id})"
+                                >Agregar</button>`
+    const index = carrito.indexOf(id); 
+    carrito.splice(index, 1); 
+           
+         var tota_pagar = 0;
+          carrito.forEach( e =>{
+  
+            producto = document.getElementById(`card-${e}`)
+            
+            precio = producto.querySelector(".precio").textContent
+            nombre = producto.querySelector(".nombre").textContent
+          
+            
+            tota_pagar +=  parseInt(precio);
+
+            elemento += `<div class="border border-2 rounded-4 mb-3 " id="carrito-${e}">
+                    <div class="d-flex p-2 justify-content-around align-items-center">
+                        <div>${nombre}</div>
+                        <div>$${precio}</div>
+                        <div> <button class="btn btn-danger" onclick='eliminar(${e})'><i class="fa fa-trash"></i></button></div>
+                    </div>
+                </div>`
+        })
+        document.querySelector(".contenedor-pedidos").innerHTML = elemento;
+        document.getElementById("total_pagar").innerHTML = `$${tota_pagar}`
+  }
+
+  function pagar(){
+   if( carrito.length == 0 ) {alert("Favor seleccionar un producto"); return}
+   window.location.href=`/pagar/${carrito.join(',')}`
+  }    
 </script>

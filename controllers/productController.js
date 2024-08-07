@@ -11,7 +11,9 @@ exports.index = async (req, res) => {
             include: [
                 { model: Commerces },
                 { model: Categories }
-            ]
+            ], where:{
+                commerceId:req.session.user.id
+            }
         });
         res.render('product/', { products: result.map(instance => instance.toJSON()) });
     } catch (error) {

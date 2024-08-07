@@ -3,7 +3,15 @@ const TypeCommerces = require('../models/TypeCommerce'); // Ajusta la ruta segú
 const helper =  require("../utils/helper")
 const Categories = require('../models/Category');
 const Products = require('../models/Product');
+const Adrees  = require('../models/Address')
+const User  = require('../models/User')
 const db = require('../contexts/cnx');
+const itbis = require('../models/Itbis');
+const { where,Op, DATEONLY } = require('sequelize');
+const order = require('../models/Order')
+const orderDetalle = require ('../models/OrderDetail')
+
+
 // Método para listar todos los comercios
 exports.index = async (req, res) => {
     res.render('profile/commerce');
@@ -134,3 +142,101 @@ exports.listByCommerce = async (req, res) => {
         res.status(500).send('Error en el servidor');
     }
 };
+
+exports.pagar = async(req,res)=>{
+    id = (req.session.user.id);
+    listado_producot = req.params.id_producto.split(',');
+    
+    result_itebis = await itbis.findAll();
+    
+    resul_producto =  await Products.findAll(
+        {
+            
+            where:{
+                id:{
+                [Op.in]: listado_producot
+            }
+        },
+        include: [{ model: Commerces }]
+    })
+    
+     resultAddresses = await Adrees.findAll({
+        where: {
+            userId: id
+        },
+        include: [{ model: User }]
+      });
+    
+    
+    comercio = resul_producto[0].dataValues.commerce;
+    res.render('home/pagar',
+        {
+            producto:resul_producto.map(r => r.toJSON()),
+            comercio:comercio.toJSON(),
+            itbis:result_itebis[0].toJSON(),
+            listado:req.params.id_producto,
+            direccion:resultAddresses.map(r=> r.toJSON())
+        } );
+}
+
+exports.readyPago = async (req,res)=>{
+    id = (req.session.user.id);
+    const {direccion,itebis,total,producto,comercio} = req.body
+
+    result_order = await order.create({
+        userId :id,
+        itbisId:itebis,
+        status:1,
+        commerceId:comercio,
+        addressId:direccion,
+        total:total
+    })
+
+    producto.split(',').forEach(p => {
+        (async () => {
+          try {
+            await orderDetalle.create({
+              orderId: result_order.id,
+              productId: p
+            });
+          } catch (error) {
+            console.error('Error al crear el detalle del pedido:', error);
+          }
+        })();
+      });
+    res.redirect('/order')
+}
+
+exports.orderViewCliente = async(req,res)=>{
+    id = req.session.user.id;
+    orderID = req.params.id;
+  
+    var query =`SELECT 
+                       concat( u.firstname,' ',u.lastname) name,
+                       DATE_FORMAT(o.createdAt,'%d %M %h:%i') fecha,
+                       o.createdAt,
+                       o.total,
+                       p.name producto,
+                       p.price precio,
+                       p.photo fotoProducto,
+                        case
+                          WHEN o.status = 1  THEN 'Pendiente'
+                          WHEN o.status = 2  THEN 'PROCESO'
+                          WHEN o.status = 2  THEN 'COMPLETO'
+                        END estado
+                    FROM commerces c
+                    JOIN orders o on o.commerceId = c.id
+                    JOIN orderdetails od on od.orderId = o.id
+                    JOIN products p ON p.id = od.productId
+                    JOIN users u on u.id = o.userId
+                    WHERE  o.id = ${orderID}`;
+  
+     result =  await db.query(query)
+  
+     dato = {
+      comercio: result[0][0].name ?? null,
+      fecha:  result[0][0].fecha ?? null,
+      estado: result[0][0].estado ?? null
+    }
+        res.render('commerce/order',{order:result[0].map(r => r),dato:dato})
+  }

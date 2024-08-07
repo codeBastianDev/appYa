@@ -1,0 +1,19 @@
+<h1>My order</h1>
+<div class="border rounded-2 p-3">
+        {{#each order}}
+        <a href="/orderDetalle/{{this.id}}" style="text-decoration: none;">
+            <div class="card mb-4">
+                    <div class="d-flex align-items-center gap-3 rounded-3 p-3">
+                        <div> <img src="/{{this.foto}}" alt="" width="50"> </div>
+                        <div>
+                            <div><strong>{{this.estado}}</strong>  <span class="card-text"><small class="text-body-secondary"> • {{this.fecha}}</small><span/></div>
+                            <div>Domino</div>
+                            <div><span class="card-text"><small class="text-body-secondary">RD${{this.total}} • <strong>{{this.pedidos}}</strong> productos</small><span/></div>
+                        </div>
+                    </div>
+            </div>
+        </a>
+            
+        {{/each}}
+    
+</div>

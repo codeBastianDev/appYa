@@ -93,7 +93,7 @@ app.use(address);
 app.use("/", ErrorController.Get404);
 
 //  Sincronizando connection
-db.sync({force: true})
+db.sync()
 .then(()=>{
     console.log('Database Connection was successfully');
 

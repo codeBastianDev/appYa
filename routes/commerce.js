@@ -15,6 +15,9 @@ router.post('/delete_producto',isAuth, controllers.delete)
 
 
 router.get("/commerce/:commerceId/products",controllers.listByCommerce);
+router.get("/pagar/:id_producto",isAuth,controllers.pagar);
+router.post("/pagar",isAuth,controllers.readyPago)
+router.get('/orderDetalleCliente/:id',isAuth, controllers.orderViewCliente);
 
 
 module.exports = router;

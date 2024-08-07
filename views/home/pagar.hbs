@@ -1,0 +1,99 @@
+<form action="/pagar" method="post">
+ <div class="row">
+
+    <div class="col-md-8">
+        <div class="p-4 border border-2 rounded-3 mb-3">
+            {{#each direccion}}
+             
+           <div class="form-check">
+                <input class="form-check-input" type="radio" name="direccion" value="{{this.id}}" id="flexRadioDefault1-{{this.id}}" required>
+                <label class="form-check-label" for="flexRadioDefault1-{{this.id}}">
+                    {{this.street}}
+                </label>
+            </div>
+            <hr>
+            {{/each}}
+        </div>
+        <div class="p-4 border border-2 rounded-3 mb-3">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th style="width: 100%;"></th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+       
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+              {{#each producto}}
+                <tr  class="border text-center">
+                    <td class="p-1">{{this.name}}</td>
+                    <td></td>
+                    <td class="p-3 precio">{{this.price}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+                 </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-4 border border-2 rounded-3 mb-3">
+            <div>
+                <img src="/{{comercio.photo}}" alt="" width="40">
+                 <span class="">{{comercio.name}}</span>
+            </div>
+            <hr>
+            <table>
+                <thead class="text-center">
+                    <tr>
+                        <th>SubTotal</th>
+                        <th style="width: 100%;"></th>
+                        <th id="sub-total">$0</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td>ITBIS</td>
+                        <td></td>
+                        <td id="itibis">{{itbis.value}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td id="total"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+     
+            <input type="hidden" id="input-itebis" name="itebis" value="{{itbis.id}}">
+            <input type="hidden" id="input-total"  name="total" value="">
+            <input type="hidden" id="input-producto"  name="producto" value="{{listado}}">
+            <input type="hidden" name="comercio" value="{{comercio.id}}">
+          
+            <button onclick="pedir()" type="submit"  class="btn btn-primary w-100">Pedir</button>
+        </form>
+    </div>
+  
+</div>
+
+<script>
+    var SubTotal = 0
+    var itebis = {{itbis.value}}
+    document.querySelectorAll('.precio').forEach(p =>{
+      SubTotal += parseInt(p.textContent)
+    })
+    document.getElementById('sub-total').innerHTML =`$${SubTotal}`
+    var itebis = (SubTotal * (itebis/100))
+
+
+    document.getElementById('input-total').value = SubTotal+ Math.round(itebis)
+    document.getElementById('total').textContent = SubTotal+ Math.round(itebis)
+    
+
+</script>
