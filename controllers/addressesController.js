@@ -1,16 +1,13 @@
 const Addresses = require("../models/Address");
-const AddressesUser = require("../models/AddressUser");
 
-exports.GetAddresses = async (req,res) => {
+exports.GetAddresses = async (req, res) => {
     var userId = req.session.user.id;
-    try{
-        let addresses = await AddressesUser.findAll({
-            where: { userId: userId },
-            include: [{ model: Addresses }]
+    try {
+        let addresses = await Addresses.findAll({
+            where: { userId: userId }
         });
-        res.render('address/index', { addresses: addresses.map(address => address.address.toJSON()) });
-    }
-    catch(err){
+        res.render('address/index', { addresses: addresses.map(address => address.toJSON()) });
+    } catch (error) {
         console.error('Error al obtener las direcciones:', error);
         res.status(500).send('Error en el servidor');
     }
@@ -25,8 +22,7 @@ exports.SaveAddress = async (req, res) => {
     var userId = req.session.user.id;
 
     try {
-        let address = await Addresses.create({ street, description });
-        await AddressesUser.create({ userId, addressId: address.id });
+        await Addresses.create({ street, description, userId });
         res.redirect('/address');
     } catch (error) {
         console.error('Error al crear la dirección:', error);
@@ -70,9 +66,8 @@ exports.UpdateAddress = async (req, res) => {
 exports.DeleteAddress = async (req, res) => {
     const { id } = req.params;
     try {
-        let addressUser = await AddressesUser.findOne({ where: { addressId: id } });
-        if (addressUser) {
-            await AddressesUser.destroy({ where: { addressId: id } });
+        let address = await Addresses.findOne({ where: { id } });
+        if (address) {
             await Addresses.destroy({ where: { id } });
             res.redirect('/address');
         } else {

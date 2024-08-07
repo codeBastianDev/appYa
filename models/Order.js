@@ -48,6 +48,10 @@ const Orders = db.define("order", {
             key: "id",
         }
     },
+    total: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
 });
 
 // Definir asociaciones

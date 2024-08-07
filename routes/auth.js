@@ -15,5 +15,7 @@ router.get('/signup', authController.GetSignup);
 router.post('/signup',upload.single('photo') ,authController.PostSignup);
 router.get('/signupCommerce',upload.single('photo'), authController.GetSignupCommerce);
 router.post('/signupCommerce',upload.single('photo') ,authController.PostSignupCommerce);
+router.get('/signupAdmin', authController.GetSignupAdmin);
+router.post('/signupAdmin', authController.PostSignupAdmin);
 
 module.exports = router;

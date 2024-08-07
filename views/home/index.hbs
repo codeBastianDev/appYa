@@ -19,6 +19,10 @@
             {{/each}}
         </div>
     {{/ifEquals}}
+    {{#ifEquals userType "admin"}}
+      <h1>Welcome to PedidosYa admin</h1>
+    {{/ifEquals}}
+
 {{else}}
     <h1>You must log in</h1>
 {{/if}}

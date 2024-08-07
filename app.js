@@ -15,7 +15,6 @@ const TypeCommerce = require("./models/TypeCommerce");
 const Commerce = require("./models/Commerce");
 const Address = require("./models/Address");
 const User = require("./models/User");
-const AddressUser = require("./models/AddressUser");
 const Category = require("./models/Category");
 const Favorite = require("./models/Favorite");
 const Order = require("./models/Order");
@@ -58,6 +57,7 @@ const commerce = require("./routes/commerce");
 const typecommerce = require("./routes/typecommerce");
 const customer = require("./routes/customer");
 const address = require("./routes/address");
+const admin = require("./routes/admin");
 
 app.engine(
     "hbs",
@@ -93,9 +93,9 @@ app.use(address);
 app.use("/", ErrorController.Get404);
 
 //  Sincronizando connection
-db.sync()
+db.sync({force: true})
 .then(()=>{
-    console.log('Database Connection was successfully'); 
+    console.log('Database Connection was successfully');
 
     app.listen('8000',() => {
       console.log('Server is running on port 8000');  //Server is running on port 8000
