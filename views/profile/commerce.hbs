@@ -1,12 +1,11 @@
 <form action="guardar_comercio" method="post" enctype="multipart/form-data">
-
-    <input type="hidden" name="id" value="{{profile.id}}">
+  <input type="hidden" name="id" value="{{profile.id}}">
 
   <div class="col-md-12 mb-4">
     {{#if profile.photo}}
-        <img src="{{profile.photo}}" alt="Profile Photo" class="rounded mx-auto d-block" width="200" alt="...">
+        <img src="{{profile.photo}}" alt="Profile Photo" class="rounded mx-auto d-block" width="200">
     {{else}}
-        <img src="https://placehold.co/400" alt="Placeholder" class="rounded mx-auto d-block" width="200" alt="...">
+        <img src="https://placehold.co/400" alt="Placeholder" class="rounded mx-auto d-block" width="200">
     {{/if}}
   </div>
 
@@ -50,7 +49,6 @@
             value="{{profile.mail}}"
             id="floatingInputGroup2"
             placeholder="Correo"
-            required
           />
           <label for="floatingInputGroup2">Correo</label>
         </div>
@@ -67,7 +65,6 @@
           id="floatingInputGrid"
           placeholder="Nombre"
           name="photo"
-          value="{{profile.name}}"
         />
         <label for="floatingInputGrid">Foto</label>
       </div>
@@ -75,17 +72,17 @@
     <div class="col-md">
       <div class="form-floating">
         <select class="form-select" id="floatingSelectGrid" name="tipo" required>
-          <option selected>Seleccione el comercio</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="" disabled>Seleccione el comercio</option>
+          {{#each types}}
+            <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+          {{/each}}
         </select>
         <label for="floatingSelectGrid">Tipo de comercio</label>
       </div>
     </div>
   </div>
 
-    <div class="row g-2 mb-4">
+  <div class="row g-2 mb-4">
     <div class="col-md">
       <div class="form-floating">
         <input
@@ -101,7 +98,7 @@
       </div>
     </div>
     <div class="col-md">
-     <div class="form-floating">
+      <div class="form-floating">
         <input
           type="time"
           class="form-control"
@@ -116,8 +113,6 @@
     </div>
   </div>  
   <div>
-    <button class="btn btn-success w-100"><i
-        class="fa-solid fa-floppy-disk"
-      ></i></button>
+    <button class="btn btn-success w-100"><i class="fa-solid fa-floppy-disk"></i></button>
   </div>
 </form>

@@ -3,9 +3,9 @@ const helper =  require("../utils/helper");
 const { where,Op, DATEONLY } = require('sequelize');
 
 exports.GetProfile = async (req, res) => {
-    const userId = req.session.user.id;  
+    const userId = req.session.user.id;
     try {
-        const profile = await Users.findByPk(userId);  
+        const profile = await Users.findByPk(userId);
         res.render("profile/delivery", {
             id: profile.id,
             firstname: profile.firstname,
