@@ -122,7 +122,47 @@
         </div>
     {{/ifEquals}}
     {{#ifEquals userType "delivery"}}
-        <h1>Home Del delivery</h1>
+        <div class="container mt-5">
+    <h2 class="mb-4">Assigned Orders</h2>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Logo</th>
+          <th scope="col">Status</th>
+          <th scope="col">Commerce Name</th>
+          <th scope="col">Total</th>
+          <th scope="col">Products Quantity</th>
+          <th scope="col">Order Date & Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="https://via.placeholder.com/50" alt="Commerce Logo" width="50"></td>
+          <td>Pending</td>
+          <td>Commerce 1</td>
+          <td>$50.00</td>
+          <td>3</td>
+          <td>2024-08-01 12:34:56</td>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/50" alt="Commerce Logo" width="50"></td>
+          <td>In Process</td>
+          <td>Commerce 2</td>
+          <td>$75.00</td>
+          <td>5</td>
+          <td>2024-08-02 13:45:12</td>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/50" alt="Commerce Logo" width="50"></td>
+          <td>Completed</td>
+          <td>Commerce 3</td>
+          <td>$20.00</td>
+          <td>2</td>
+          <td>2024-08-03 14:23:45</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
     {{/ifEquals}}
 {{else}}
     <div class="container text-center my-5">

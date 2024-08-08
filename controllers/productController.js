@@ -64,7 +64,7 @@ exports.insert = async (req, res) => {
                 price:price,
                 commerceId:req.session.user.id,
                 categoryId:id_categoria,
-                campo_photo
+                ...campo_photo
             }, {
                 where: { id: id }
             });
