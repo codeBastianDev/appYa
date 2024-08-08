@@ -18,6 +18,8 @@ router.get("/commerce/:commerceId/products",controllers.listByCommerce);
 router.get("/pagar/:id_producto",isAuth,controllers.pagar);
 router.post("/pagar",isAuth,controllers.readyPago)
 router.get('/orderDetalleCliente/:id',isAuth, controllers.orderViewCliente);
+router.get('/enviarDelibey/:id',isAuth, controllers.enviar);
+router.post('/enviarPedido',isAuth, controllers.enviarDelivery);
 
 
 module.exports = router;

@@ -1,0 +1,15 @@
+
+<form action="/enviarPedido" method="post">
+     <input type="hidden" name="id" value="{{data}}">
+      {{#each delivery }}
+
+      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="deli" value="{{this.id}}" id="flexRadioDefault1-{{this.id}}" required>
+                        <label class="form-check-label" for="flexRadioDefault1-{{this.id}}">
+                            {{this.firstname}}
+                        </label>
+                    </div>
+                    <hr>
+      {{/each}}
+      <button class="btn btn-primary w-100">Enviar</button>
+</form>

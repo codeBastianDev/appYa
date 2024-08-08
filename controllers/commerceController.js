@@ -216,7 +216,8 @@ exports.orderViewCliente = async (req, res) => {
   id = req.session.user.id;
   orderID = req.params.id;
 
-  var query = `SELECT 
+  var query = `SELECT  
+                       o.id,
                        concat( u.firstname,' ',u.lastname) name,
                        DATE_FORMAT(o.createdAt,'%d %M %h:%i') fecha,
                        o.createdAt,
@@ -227,7 +228,7 @@ exports.orderViewCliente = async (req, res) => {
                         case
                           WHEN o.status = 1  THEN 'Pendiente'
                           WHEN o.status = 2  THEN 'PROCESO'
-                          WHEN o.status = 2  THEN 'COMPLETO'
+                          WHEN o.status = 3  THEN 'COMPLETO'
                         END estado
                     FROM commerces c
                     JOIN orders o on o.commerceId = c.id
@@ -242,6 +243,38 @@ exports.orderViewCliente = async (req, res) => {
     comercio: result[0][0].name ?? null,
     fecha: result[0][0].fecha ?? null,
     estado: result[0][0].estado ?? null,
+    id: result[0][0].id ?? null,
   };
   res.render("commerce/order", { order: result[0].map((r) => r), dato: dato });
 };
+
+
+exports.enviar = async(req,res)=>{
+  orderID = req.params.id;
+  delivery = await User.findAll({where:{roleId:3,availability:1}})
+  res.render("commerce/list_delivery",{delivery:delivery.map(r => r.toJSON()),data:orderID})
+}
+
+
+
+exports.enviarDelivery = async(req,res)=>{
+
+  const { deli ,id} = req.body;
+  console.log(deli, id, "datas");
+  
+      await order.update({
+        status:2,
+        deliveryId:deli
+    }, {
+        where: { id: id }
+    });
+
+    await User.update({
+        availability:0,
+      },{
+        where: { id: deli }
+      })
+   res.redirect('/')
+  
+
+}
