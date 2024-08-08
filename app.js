@@ -18,7 +18,6 @@ const User = require("./models/User");
 const Category = require("./models/Category");
 const Favorite = require("./models/Favorite");
 const Order = require("./models/Order");
-const Shipment = require("./models/shipment");
 const Product = require("./models/Product");
 const OrderDetail = require("./models/OrderDetail");
 
@@ -58,6 +57,7 @@ const typecommerce = require("./routes/typecommerce");
 const customer = require("./routes/customer");
 const address = require("./routes/address");
 const admin = require("./routes/admin");
+const delivery = require("./routes/delivery");
 
 app.engine(
     "hbs",
@@ -87,6 +87,7 @@ app.use(typecommerce);
 app.use(customer);
 app.use(address);
 app.use(admin);
+app.use(delivery);
 
 //Use Controllers````
 //app.use(roleController);

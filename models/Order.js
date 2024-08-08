@@ -54,6 +54,10 @@ const Orders = db.define("order", {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    deliveryId:{
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    }
 });
 
 // Definir asociaciones

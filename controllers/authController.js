@@ -60,6 +60,8 @@ exports.PostLogin = (req, res, next) => {
           handleLogin(user, password, req, res, "customer");
         else if (user.roleId === 2)
           handleLogin(user, password, req, res, "admin");
+        else if (user.roleId === 3)
+          handleLogin(user, password, req, res, "delivery");
       }
     })
     .catch((err) => {
@@ -83,23 +85,6 @@ exports.GetSignup = (req, res, next) => {
   });
 };
 
-
-exports.GetSignupCommerce = (req, res, next) => {
-  TypeCommerce.findAll()
-    .then((typeCommerces) => {
-      res.render("auth/signupCommerce", {
-        pageTittle: "SignupCommerce",
-        signupActive: true,
-        typeCommerces: typeCommerces.map(type => type.toJSON())
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.redirect("/");
-    });
-};
-
-
 exports.PostSignup = (req, res, next) => {
   let Image = helper.saveImage(req.file);
   const username = req.body.username;
@@ -111,6 +96,7 @@ exports.PostSignup = (req, res, next) => {
   const phone = req.body.phone;
   const photo = Image;
   const dni = req.body.dni;
+  const roleId = req.body.role;
 
   if (password !== confirmpassword) {
     req.flash("errors", "Password and Confirmpassword dont match");
@@ -138,8 +124,8 @@ exports.PostSignup = (req, res, next) => {
             phone: phone,
             photo: photo,
             dni: dni,
-            roleId: 1,
-            isActive: true,
+            roleId: roleId,
+            isActive: false,
             availability: true,
           })
             .then((result) => {
@@ -157,6 +143,22 @@ exports.PostSignup = (req, res, next) => {
     .catch((err) => {
       console.log(err);
       return res.redirect("/signup");
+    });
+};
+
+
+exports.GetSignupCommerce = (req, res, next) => {
+  TypeCommerce.findAll()
+    .then((typeCommerces) => {
+      res.render("auth/signupCommerce", {
+        pageTittle: "SignupCommerce",
+        signupActive: true,
+        typeCommerces: typeCommerces.map(type => type.toJSON())
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect("/");
     });
 };
 

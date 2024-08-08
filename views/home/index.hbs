@@ -121,6 +121,9 @@
             </div>
         </div>
     {{/ifEquals}}
+    {{#ifEquals userType "delivery"}}
+        <h1>Home Del delivery</h1>
+    {{/ifEquals}}
 {{else}}
     <div class="container text-center my-5">
         <h1 class="display-4">You must log in</h1>

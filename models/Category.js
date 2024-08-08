@@ -22,11 +22,9 @@ const Categories = db.define("category", {
         allowNull: false,
         references: {
             model: Commerces,
-            key: "id",
-            onDelete: "SET NULL",  
-            onUpdate: "CASCADE" 
-        }
-    },
+            key: "id"
+        },
+    }
 });
 
 Categories.belongsTo(Commerces, { foreignKey: "commerceId" });

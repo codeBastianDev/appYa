@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <h2>Editar Perfil</h2>
+    <form id="editProfileForm" action="/updateProfile" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{id}}">
+
+        <div class="col-md-12 mb-4">
+            {{#if photo}}
+                <img src="{{photo}}" alt="Profile Photo" class="rounded mx-auto d-block" width="200" alt="...">
+            {{else}}
+                <img src="https://placehold.co/400" alt="Placeholder" class="rounded mx-auto d-block" width="200" alt="...">
+            {{/if}}
+        </div>
+
+        <div class="row g-2 mb-4">
+            <div class="col-md">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="firstname"
+                        id="firstname"
+                        required
+                        placeholder="Nombre"
+                        value="{{firstname}}"
+                    />
+                    <label for="firstname">Nombre</label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="lastname"
+                        id="lastname"
+                        required
+                        placeholder="Apellido"
+                        value="{{lastname}}"
+                    />
+                    <label for="lastname">Apellido</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-2 mb-4">
+            <div class="col-md">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="phone"
+                        id="phone"
+                        required
+                        placeholder="Teléfono"
+                        value="{{phone}}"
+                    />
+                    <label for="phone">Teléfono</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-2 mb-4">
+            <div class="col-md">
+                <div class="form-floating">
+                    <input
+                        type="file"
+                        class="form-control"
+                        id="photo"
+                        name="photo"
+                    />
+                    <label for="photo">Foto</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-2 mb-4">
+            <div class="col-md">
+                <button type="button" class="btn btn-secondary w-100" onclick="window.location.href='/'"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+            <div class="col-md">
+                <button type="submit" class="btn btn-success w-100"><i
+        class="fa-solid fa-floppy-disk"
+      ></i></button>
+            </div>
+        </div>
+    </form>
+</div>

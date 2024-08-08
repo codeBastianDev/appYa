@@ -93,6 +93,16 @@
                                 <p>Signup Admin</p>
                             </a> --}}
                         {{/ifEquals}}
+                        {{#ifEquals userType "delivery"}}
+                            <a href="/" class="nav-link text-white text-center py-2">
+                                <i class="fas fa-home"></i>
+                                <p>Home</p>
+                            </a>
+                            <a href="/profiledelivery" class="nav-link text-white text-center py-2 {{#if signupActive}}active{{/if}}">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <p>Profile</p>
+                            </a>
+                        {{/ifEquals}}
                     {{/if}}
                 </div>
             </div>
