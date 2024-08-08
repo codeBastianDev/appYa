@@ -24,6 +24,8 @@ const OrderDetails = db.define("orderDetail", {
         references: {
             model: Products,
             key: "id",
+            onDelete: "SET NULL",  
+            onUpdate: "CASCADE" 
         }
     },
 });

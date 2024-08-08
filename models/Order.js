@@ -46,6 +46,8 @@ const Orders = db.define("order", {
         references: {
             model: Addresses,
             key: "id",
+            onDelete: "SET NULL",  
+            onUpdate: "CASCADE" 
         }
     },
     total: {

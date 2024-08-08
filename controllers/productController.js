@@ -25,7 +25,7 @@ exports.index = async (req, res) => {
 // Método para renderizar la vista de guardar producto
 exports.save = async (req, res) => {
     var id = req.query.id;
-    var categoria = await Categories.findAll()
+    var categoria = await Categories.findAll({ where:{commerceId:id} })
     if (id > 0) {
         try {
             let result = await Products.findOne({

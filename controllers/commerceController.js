@@ -136,7 +136,7 @@ exports.listByCommerce = async (req, res) => {
        
           
         // Renderizar la vista con la información del comercio y las categorías con productos
-        res.render('home/commer_product',{list_producto});
+        res.render('home/commer_product',{list_producto,commerceId:commerceId});
     } catch (error) {
         console.error('Error al listar los productos del comercio:', error);
         res.status(500).send('Error en el servidor');
@@ -175,7 +175,7 @@ exports.pagar = async(req,res)=>{
             comercio:comercio.toJSON(),
             itbis:result_itebis[0].toJSON(),
             listado:req.params.id_producto,
-            direccion:resultAddresses.map(r=> r.toJSON())
+            direccion:resultAddresses.map(r=> r.toJSON() ?? null)
         } );
 }
 

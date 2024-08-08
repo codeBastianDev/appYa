@@ -23,7 +23,7 @@ const Categories = db.define("category", {
         references: {
             model: Commerces,
             key: "id",
-            onDelete: "CASCADE",  
+            onDelete: "SET NULL",  
             onUpdate: "CASCADE" 
         }
     },

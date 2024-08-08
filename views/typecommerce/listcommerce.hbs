@@ -5,7 +5,7 @@
     <!-- Form to search commerces by name -->
     <form class="mb-3" method="GET" action="{{url}}">
         <div class="input-group">
-            <input type="text" class="form-control" name="search" placeholder="Search commerces by name" value="{{searchQuery}}">
+            <input type="text" class="form-control" id="buscador" name="search" placeholder="Search commerces by name" value="{{searchQuery}}">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </form>
@@ -36,3 +36,18 @@
             {{/each}}
     </div>
 </div>
+
+<script>
+    document.getElementById('buscador').addEventListener('keyup', e => {
+    seach = e.target.value;
+    registro = document.querySelectorAll('.card');
+    registro.forEach(element => {
+      texto = element.querySelector(".card-title").textContent.toLowerCase()
+      if (texto.includes(seach.toLowerCase()) || seach == '') {
+        element.style.display = '';
+      } else {
+        element.style.display = 'none';
+    }
+});
+})
+</script>
