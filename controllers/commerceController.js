@@ -128,66 +128,6 @@ exports.listByCommerce = async (req, res) => {
                         where cm.id = ${commerceId}`;
     let product = await db.query(query);
 
-<<<<<<< HEAD
-       product[0].forEach(e => {
-         if (!categorias[e.categoria]) {
-           categorias[e.categoria] = [];
-         }
-         categorias[e.categoria].push(e);
-       });
-       
-       const list_producto = Object.keys(categorias).map(categoria => {
-         return {
-           categoria: categoria,
-           productos: categorias[categoria]
-         };
-       });
-       
-          
-        // Renderizar la vista con la información del comercio y las categorías con productos
-        res.render('home/commer_product',{list_producto,commerceId:commerceId});
-    } catch (error) {
-        console.error('Error al listar los productos del comercio:', error);
-        res.status(500).send('Error en el servidor');
-    }
-};
-
-exports.pagar = async(req,res)=>{
-    id = (req.session.user.id);
-    listado_producot = req.params.id_producto.split(',');
-    
-    result_itebis = await itbis.findAll();
-    
-    resul_producto =  await Products.findAll(
-        {
-            
-            where:{
-                id:{
-                [Op.in]: listado_producot
-            }
-        },
-        include: [{ model: Commerces }]
-    })
-    
-     resultAddresses = await Adrees.findAll({
-        where: {
-            userId: id
-        },
-        include: [{ model: User }]
-      });
-    
-    
-    comercio = resul_producto[0].dataValues.commerce;
-    res.render('home/pagar',
-        {
-            producto:resul_producto.map(r => r.toJSON()),
-            comercio:comercio.toJSON(),
-            itbis:result_itebis[0].toJSON(),
-            listado:req.params.id_producto,
-            direccion:resultAddresses.map(r=> r.toJSON() ?? null)
-        } );
-}
-=======
     let categorias = {};
 
     product[0].forEach((e) => {
@@ -215,7 +155,6 @@ exports.pagar = async(req,res)=>{
 exports.pagar = async (req, res) => {
   id = req.session.user.id;
   listado_producot = req.params.id_producto.split(",");
->>>>>>> 1bbe9c7c291cba7c6109c49a791c4e30f3054dbc
 
   result_itebis = await itbis.findAll();
 
