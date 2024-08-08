@@ -64,11 +64,19 @@ exports.insert = async (req,res)=>{
     res.redirect("/categoria");
 }
 
-exports.delete = async(req,res)=>{
-    id = ((req.body.id))
-    await model.destroy({
-        where:{
-            id:id
-        }
-    });
-}
+exports.delete = async (req, res) => {
+    const id = req.body.id;  
+    try {
+        // Intentar eliminar el registro
+        await model.destroy({
+            where: {
+                id: id
+            }
+        });
+        res.redirect('/success');  
+    } catch (error) {
+        console.error("Error al eliminar el registro:", error);
+        req.flash("errors", `An error has occurred: ${error.message}`);
+        res.redirect('/categoria');
+    }
+};

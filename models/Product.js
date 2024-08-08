@@ -40,15 +40,14 @@ const Products = db.define("product", {
         references: {
             model: Categories,
             key: "id",
-            onDelete: "CASCADE",  
-            onUpdate: "CASCADE" 
+             onDelete: "CASCADE",  
+             onUpdate: "CASCADE" 
         }
     },
 });
 
 Products.belongsTo(Commerces, { foreignKey: "commerceId" });
 Products.belongsTo(Categories, { foreignKey: "categoryId" });
-
 
 
 module.exports = Products;

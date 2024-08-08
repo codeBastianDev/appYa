@@ -48,10 +48,10 @@ exports.insert = async (req, res) => {
         ...campo_photo,
       },
       {
-        where: { id: 1 },
+        where: { id: req.session.user.id },
       }
     );
-    res.redirect("/");
+    res.redirect("/profileCustomer");
   } catch (error) {
     console.error("Error save user:", error);
     res.status(500).send("Error in server");
