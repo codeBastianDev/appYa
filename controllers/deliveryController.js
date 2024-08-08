@@ -1,5 +1,7 @@
 const Users = require("../models/User"); 
 const helper =  require("../utils/helper");
+const order = require("../models/Order");
+const User = require("../models/User");
 const { where,Op, DATEONLY } = require('sequelize');
 
 exports.GetProfile = async (req, res) => {
@@ -49,3 +51,21 @@ exports.updateProfile = async (req, res) => {
         res.status(500).send('Error en el servidor');
     }
 };
+
+exports.entregado = async (req,res )=>{
+    id = req.params.id
+
+    await order.update({
+        status:3,
+    }, {
+        where: { id: id }
+    });
+
+    await User.update({
+        availability:1,
+      },{
+        where: { id:  req.session.user.id }
+      })
+      res.redirect('/')
+}
+

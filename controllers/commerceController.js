@@ -260,7 +260,7 @@ exports.enviar = async(req,res)=>{
 exports.enviarDelivery = async(req,res)=>{
 
   const { deli ,id} = req.body;
-  console.log(deli, id, "datas");
+ 
   
       await order.update({
         status:2,

@@ -10,5 +10,6 @@ const isAuth = require("../middlewares/is-auth");
 
 router.get('/profileDelivery',isAuth, deliveriesController.GetProfile);
 router.post('/updateProfile', isAuth, upload.single('photo'), deliveriesController.updateProfile);
+router.get('/listo_e/:id', isAuth, upload.single('photo'), deliveriesController.entregado);
 
 module.exports = router;

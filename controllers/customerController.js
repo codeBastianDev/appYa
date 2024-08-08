@@ -111,7 +111,7 @@ exports.order = async(req,res)=>{
                       case 
                         WHEN o.status = 1  THEN 'PENDIENTE'
                         WHEN o.status = 2  THEN 'PROCESO' 
-                        WHEN o.status = 2  THEN 'COMPLETO' 
+                        WHEN o.status = 3  THEN 'COMPLETO' 
                       END estado
                   FROM commerces c
                   JOIN orders o on o.commerceId = c.id
@@ -167,7 +167,7 @@ exports.orderCliente = async(req,res)=>{
                       case 
                         WHEN o.status = 1  THEN 'PENDIENTE'
                         WHEN o.status = 2  THEN 'PROCESO' 
-                        WHEN o.status = 2  THEN 'COMPLETO' 
+                        WHEN o.status = 3  THEN 'COMPLETO' 
                       END estado
                   FROM commerces c
                   JOIN orders o on o.commerceId = c.id
